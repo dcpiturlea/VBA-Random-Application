@@ -1,0 +1,82 @@
+Private Function StartLabel(stopFunc As Boolean)
+
+Dim cityDictionary As Object
+Set cityDictionary = CreateObject("Scripting.Dictionary")
+Set cityDictionary = AlegereLocalitate
+
+Dim i As Integer
+For i = 0 To cityDictionary.Count - 1
+    Debug.Print cityDictionary.Keys()(i), cityDictionary.Items()(i)
+    Label1.Caption = cityDictionary.Items()(i)
+    Call Delay(0.05)
+    DoEvents
+    If i = cityDictionary.Count - 1 Then
+        i = 0
+        j = j + 1
+    End If
+    If stopFunc Then
+    Exit Function
+    End If
+Next i
+
+End Function
+
+Sub StopLabel()
+Label1.Caption = ""
+End Sub
+
+Private Sub CommandButton3_Click()
+End
+End Sub
+
+Private Sub UserForm_Terminate()
+    End
+End Sub
+
+
+Private Sub CommandButton1_Click()
+DoEvents
+    CommandButton2.Visible = True
+    CommandButton1.Visible = False
+    StartLabel (False)
+End Sub
+
+
+Private Sub CommandButton2_Click()
+    Label4.Visible = True
+    Label1.Visible = False
+    Label2.Visible = True
+    Dim strLocalitate As String
+    strLocalitate = ramdomLocatlitate(AlegereLocalitate)
+    Label2.Caption = UCase(strLocalitate)
+    CommandButton2.Visible = False
+    CommandButton3.Visible = True
+    
+End Sub
+
+
+
+
+Private Sub userform_initialize()
+Label4.Visible = False
+Label1.Caption = ""
+Label2.Visible = False
+CommandButton2.Visible = False
+CommandButton3.Visible = False
+End Sub
+
+
+Private Sub WorkBookVisibleToggleButton_Click()
+    Application.Visible = False
+    If WorkBookVisibleToggleButton.Value = False Then
+        WorkBookVisibleToggleButton.Caption = "Incarca localitati"
+        Application.Visible = False
+        
+
+    Else:
+        WorkBookVisibleToggleButton.Caption = "Ascunde excel"
+        Application.Visible = True
+        End
+    End If
+End Sub
+
